@@ -1,45 +1,68 @@
 # ombadagi-website
 
-Professional landing page for **Om Badagi** — Industry 4.0 and industrial digital solutions.
+Personal brand and consulting site for **Om Badagi** — Industry 4.0, Lean operational excellence, workflow automation, ERP and supply-chain process work.
 
-Plain static site: HTML5, CSS3, vanilla JavaScript. No build step, no frameworks, no backend.
+Static site: HTML, CSS and vanilla JavaScript. **No build step, no framework, no backend, no dependencies.** Hosted free on Cloudflare Pages.
 
-## Files
+## Structure
 
 | File | Purpose |
-|------|---------|
-| `index.html` | Page content and structure |
-| `styles.css` | All styling (responsive, dark theme) |
-| `script.js` | Mobile menu, scroll effects, footer year |
-| `README.md` | This file |
+|---|---|
+| `index.html` | Page structure, SEO / social metadata, all 9 sections |
+| `styles.css` | Design system (tokens at the top) and responsive layout |
+| `data.js` | **All editable content and config** — email, LinkedIn, system layers, capabilities, method steps |
+| `kiln.js` | Hero: wireframe rotary kiln drawn on canvas, with simulated sensor annotations |
+| `lab.js` | Section 05: simulated production cell (vibration trend, OEE, downtime Pareto, automation trace) |
+| `script.js` | Navigation, accessible tabs, scroll reveals, email composer |
+| `assets/favicon.svg` | Favicon |
+| `assets/og-image.png` | Social-share preview image (1200×630) |
+| `_headers` | Cloudflare Pages security headers + asset caching |
 
-All four files sit in the repository **root**.
+## Editing content
 
-## Hosting
+- **Email address / LinkedIn:** top of `data.js` (`email`, `linkedin`). The LinkedIn URL is also written in `index.html` (3 links + JSON-LD) — search for `om-badagi`.
+- **Capabilities, system layers, method steps:** `data.js`.
+- **Headline, profile timeline, "why" section:** `index.html`.
+- **Colours / fonts / spacing:** CSS variables at the top of `styles.css`.
 
-Deployed free on **Cloudflare Pages**, connected to this GitHub repo.
+## Things to verify before publishing
 
-- Framework preset: `None`
+- Profile timeline (dates, titles, Fives FCB wording). LinkedIn could not be read automatically.
+- "Lean Green Belt" — confirm the exact credential name and issuer.
+- The note that consulting is independent of your employer — keep it; check your employment contract allows outside activity.
+
+## Honesty rules built into the site
+
+- Every number in the hero and the Lab is generated in the browser and labelled **simulated**.
+- No client logos, testimonials, statistics or results.
+- No vendor-partner claims (ERP work is described as vendor-neutral).
+- The contact form does **not** send anything to a server. It builds a pre-filled `mailto:` link that opens the visitor's own email app. Limitation: visitors without a configured mail app must copy the address shown. To receive form submissions directly later, add a free service (e.g. Cloudflare Pages Functions + an email API, or Formspree's free tier) and update `script.js`.
+
+## Run locally
+
+```bash
+cd ombadagi-website
+python3 -m http.server 8000
+# open http://localhost:8000
+```
+
+Any static server works. Opening `index.html` directly also works.
+
+## Deploy (Cloudflare Pages)
+
+Connected to this GitHub repo. Settings:
+
+- Framework preset: **None**
 - Build command: *(empty)*
-- Build output directory: *(empty, or `/` if a value is required)*
-- Production branch: `main`
+- Build output directory: *(empty / `/`)*
+- Production branch: **main**
 
-Every commit to `main` redeploys automatically in about a minute.
+Every push to `main` deploys to production. Pushes to other branches create a **preview URL** (`<branch>.ombadagi-website.pages.dev`) — use this to review changes before merging.
 
-## How to edit
+## Accessibility & performance
 
-1. Open the file on GitHub → click the pencil icon (Edit).
-2. Change the text.
-3. Click **Commit changes…** → commit to `main`.
-4. Cloudflare redeploys automatically.
-
-## Things to check / personalise
-
-- Contact email (`ombadagi@gmail.com`) appears 2× in `index.html` — change if you create `contact@ombadagi.com`.
-- Optional LinkedIn button is commented out in the Contact section — add your URL and remove the `<!-- -->`.
-- "Reply within two working days" promise in Contact — adjust if needed.
-- Background timeline — confirm all entries before publishing.
-
-## Privacy
-
-No cookies, no analytics, no forms, no third-party tracking. Only Google Fonts is loaded externally.
+- Keyboard-operable tabs (arrow keys, Home/End), visible focus, skip link.
+- `prefers-reduced-motion`: animations off, static settled states.
+- Canvas animations pause when offscreen or when the tab is hidden; device-pixel ratio capped at 2.
+- No external JS. Only external request: Google Fonts (IBM Plex Sans / Mono).
+- No cookies, no analytics.
