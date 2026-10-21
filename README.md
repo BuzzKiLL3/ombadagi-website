@@ -10,10 +10,10 @@ Static site: HTML, CSS and vanilla JavaScript. **No build step, no framework, no
 |---|---|
 | `index.html` | Page structure, SEO / social metadata, all 9 sections |
 | `styles.css` | Design system (tokens at the top) and responsive layout |
-| `data.js` | **All editable content and config** — email, LinkedIn, system layers, capabilities, method steps |
-| `kiln.js` | Hero: wireframe rotary kiln drawn on canvas, with simulated sensor annotations |
-| `lab.js` | Section 05: simulated production cell (vibration trend, OEE, downtime Pareto, automation trace) |
-| `script.js` | Navigation, accessible tabs, scroll reveals, email composer |
+| `data.js` | **All editable content and config** — email, LinkedIn, hero machines, capability pathways, machine-lab definitions, workflow scenarios, DMAIC phases |
+| `ecosystem.js` | Hero: isometric connected factory (CNC, robot cell, press, pump & motor, conveyor, warehouse rack) with clickable machines and data flowing to business systems |
+| `machines.js` | Section 03: multi-machine monitoring demo — each machine has its own signals, connectivity and simulated fault |
+| `script.js` | Navigation, capability explorer, operations↔business workflow graph, DMAIC control chart, scroll reveals, email composer |
 | `assets/favicon.svg` | Favicon |
 | `assets/og-image.png` | Social-share preview image (1200×630) |
 | `_headers` | Cloudflare Pages security headers + asset caching |
@@ -21,8 +21,8 @@ Static site: HTML, CSS and vanilla JavaScript. **No build step, no framework, no
 ## Editing content
 
 - **Email address / LinkedIn:** top of `data.js` (`email`, `linkedin`). The LinkedIn URL is also written in `index.html` (3 links + JSON-LD) — search for `om-badagi`.
-- **Capabilities, system layers, method steps:** `data.js`.
-- **Headline, profile timeline, "why" section:** `index.html`.
+- **Capability pathways, machines, workflows, DMAIC text:** `data.js`.
+- **Headline, profile timeline, "why" section, contact topics:** `index.html`.
 - **Colours / fonts / spacing:** CSS variables at the top of `styles.css`.
 
 ## Things to verify before publishing
@@ -33,7 +33,7 @@ Static site: HTML, CSS and vanilla JavaScript. **No build step, no framework, no
 
 ## Honesty rules built into the site
 
-- Every number in the hero and the Lab is generated in the browser and labelled **simulated**.
+- Every machine value, workflow and chart is generated in the browser and labelled **illustrative / simulated**. Machine types are examples of the kinds of equipment covered, not a list of past projects.
 - No client logos, testimonials, statistics or results.
 - No vendor-partner claims (ERP work is described as vendor-neutral).
 - The contact form does **not** send anything to a server. It builds a pre-filled `mailto:` link that opens the visitor's own email app. Limitation: visitors without a configured mail app must copy the address shown. To receive form submissions directly later, add a free service (e.g. Cloudflare Pages Functions + an email API, or Formspree's free tier) and update `script.js`.
