@@ -1,138 +1,109 @@
-/* ============================================================
-   SITE CONTENT & CONFIG — edit text here, not in the HTML.
-   ============================================================ */
+/* ==========================================================================
+   SITE CONTENT, CONTACT CONFIG & MEDIA MANIFEST
+   Edit words and media here — no HTML changes needed for most updates.
+   ========================================================================== */
 window.SITE = {
-  // Change this once you have contact@ombadagi.com
   email: "ombadagi@gmail.com",
   linkedin: "https://www.linkedin.com/in/om-badagi",
 
-  /* ---------- HERO: machines in the ecosystem (illustrative) ---------- */
-  hero: {
-    cnc:      { name: "CNC machining centre", signals: "Spindle load · vibration · cycle time", link: "Controller data (e.g. OPC UA / MTConnect)" },
-    robot:    { name: "Robotic cell", signals: "Cycle time · joint torque · gripper faults", link: "Robot controller / PLC" },
-    press:    { name: "Forming / moulding press", signals: "Pressure · temperature · cycle count", link: "Machine PLC" },
-    pump:     { name: "Pump & motor", signals: "Vibration · motor current · pressure", link: "Retrofit sensors + gateway" },
-    conveyor: { name: "Conveyor line", signals: "Speed · jams · throughput", link: "Line PLC + photo-eyes" },
-    rack:     { name: "Warehouse & intralogistics", signals: "Stock levels · picks · moves", link: "WMS / ERP records" }
+  /* ---------- MEDIA ----------
+     All media is used under free licences and loaded from the provider's CDN.
+     To self-host: download the file, put it in /assets/media/, and replace the
+     URL below with "assets/media/<file>". Credits are listed in README.md.     */
+  media: {
+    heroVideo: "https://videos.pexels.com/video-files/9033891/9033891-hd_1280_720_24fps.mp4",
+    heroPoster: "https://images.pexels.com/videos/9033891/cnc-engineering-machining-manufacturing-9033891.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    heroPosterSmall: "https://images.pexels.com/videos/9033891/cnc-engineering-machining-manufacturing-9033891.jpeg?auto=compress&cs=tinysrgb&w=900"
   },
-  systems: ["Production", "Maintenance", "Inventory", "ERP", "Dashboards"],
 
-  /* ---------- 02 CAPABILITIES EXPLORER ---------- */
-  pathways: [
-    { code: "P1", name: "Machines & equipment", topic: "Equipment & production monitoring", glyph: "machine",
-      problem: "Equipment behaviour is invisible until something stops.",
-      approach: "Audit what each machine already exposes — controller, PLC or nothing — and add only the sensors that predict real failure modes.",
-      solution: "Machine connectivity and condition-monitoring views, chosen per machine type." },
-    { code: "P2", name: "Manufacturing & production", topic: "Operational improvement", glyph: "line",
-      problem: "Output varies and nobody agrees why.",
-      approach: "Capacity and throughput analysis, bottleneck identification, planning and scheduling review.",
-      solution: "Production KPIs, loss tracking and a clear improvement plan for the constraint." },
-    { code: "P3", name: "Maintenance & visibility", topic: "Equipment & production monitoring", glyph: "maint",
-      problem: "Maintenance is reactive; history lives in notebooks.",
-      approach: "Downtime and failure analysis, condition indicators, structured maintenance records.",
-      solution: "Equipment-health dashboards, alert rules and digital maintenance logs." },
-    { code: "P4", name: "Business workflows & automation", topic: "Business automation", glyph: "auto",
-      problem: "Skilled people re-type data and build the same reports every week.",
-      approach: "Map the repetitive work, then automate data flows, reports and tool integrations — using AI only where it is reliable.",
-      solution: "Automated reporting, integrations and AI-assisted information processing." },
-    { code: "P5", name: "ERP & enterprise processes", topic: "ERP & workflow optimisation", glyph: "erp",
-      problem: "The ERP holds the data, but processes around it are slow or broken.",
-      approach: "Business-process mapping, requirements gathering, data-flow and reporting analysis. Vendor-neutral — not a reseller or certified partner.",
-      solution: "Clean processes, better reporting and integrations that match how the business works." },
-    { code: "P6", name: "Logistics & supply chain", topic: "Supply chain & logistics", glyph: "scm",
-      problem: "Material flow, stock and supplier lead times are hard to see and control.",
-      approach: "Supply-chain and logistics workflow analysis, inventory visibility, supplier-process review, market and sourcing research incl. India–Europe.",
-      solution: "Material-flow visibility, leaner inventory and evidence-based sourcing decisions." },
-    { code: "P7", name: "Operational excellence & Lean Six Sigma", topic: "Operational improvement", glyph: "lean",
-      problem: "Waste, waiting, rework and inconsistent processes hide inside daily routine.",
-      approach: "Process mapping, root-cause analysis and DMAIC-based problem solving, backed by real data.",
-      solution: "Standardised, measurable processes and a team that can keep improving them." }
-  ],
+  /* Unsplash photo ids (images.unsplash.com/photo-<id>) — see README for credits */
+  photo: function (id, w, h) {
+    return "https://images.unsplash.com/photo-" + id + "?auto=format&fit=crop&q=72&w=" + w + (h ? "&h=" + h : "");
+  },
 
-  /* ---------- 03 MACHINE LAB (all simulated) ---------- */
+  /* ---------- 03 MACHINES GALLERY (illustrative application examples) ---------- */
   machines: [
-    { id: "cnc", name: "CNC machining centre", short: "CNC",
-      link: "Controller data via OPC UA / MTConnect where available — often no extra sensors needed.",
-      sensors: [["Spindle load", "controller"], ["Spindle vibration", "retrofit accelerometer"], ["Cycle time", "controller"], ["Part count", "controller"]],
-      signal: { name: "Spindle load", unit: "%", base: 52, noise: 5, limit: 85, fault: 38 },
-      kpis: [["Cycle time", "s", 74, 2], ["Parts / h", "", 48, 2]],
-      fault: "Simulate tool wear",
-      insight: ["Spindle load climbing at constant feed — consistent with tool wear.", "Suggested: tool change at next part; log tool life against part count."] },
-    { id: "motor", name: "Electric motor & gearbox", short: "Motor",
-      link: "Usually no controller data. Retrofit: vibration + current sensors over a wireless or wired gateway.",
-      sensors: [["Vibration (RMS)", "retrofit accelerometer"], ["Motor current", "current clamp"], ["Bearing temperature", "retrofit probe"]],
-      signal: { name: "Vibration RMS", unit: "mm/s", base: 2.1, noise: 0.3, limit: 4.5, fault: 3.6 },
-      kpis: [["Current", "A", 18.4, 0.6], ["Bearing temp.", "°C", 47, 1]],
-      fault: "Simulate bearing wear",
-      insight: ["Vibration trend above alert limit for 3 readings — early bearing wear pattern.", "Suggested: schedule inspection in planned stop; order spare bearing."] },
-    { id: "pump", name: "Centrifugal pump", short: "Pump",
-      link: "Pressure and flow transmitters (often already present) plus motor current from the drive.",
-      sensors: [["Discharge pressure", "transmitter"], ["Flow", "flowmeter"], ["Motor current", "VFD"], ["Vibration", "retrofit"]],
-      signal: { name: "Discharge pressure", unit: "bar", base: 6.2, noise: 0.15, limit: 5.0, fault: -1.9, low: true },
-      kpis: [["Flow", "m³/h", 41, 1], ["Motor current", "A", 22, 0.5]],
-      fault: "Simulate suction blockage",
-      insight: ["Pressure dropping while current stays flat — possible suction restriction or cavitation.", "Suggested: check suction strainer; alert operator before dry running."] },
-    { id: "conveyor", name: "Belt conveyor", short: "Conveyor",
-      link: "Line PLC states, an encoder for belt speed and photo-eyes for jams.",
-      sensors: [["Belt speed", "encoder"], ["Jam detection", "photo-eye"], ["Drive current", "VFD"]],
-      signal: { name: "Belt speed", unit: "m/s", base: 1.2, noise: 0.03, limit: 1.0, fault: -0.35, low: true },
-      kpis: [["Throughput", "items/min", 64, 2], ["Micro-stops", "/h", 3, 0.6]],
-      fault: "Simulate belt slip",
-      insight: ["Belt speed below set-point while drive runs normally — slip likely.", "Suggested: check belt tension; count micro-stops by cause on the shift report."] },
-    { id: "robot", name: "Robotic cell", short: "Robot",
-      link: "Robot controller and cell PLC: cycle times, faults, joint data where the vendor exposes it.",
-      sensors: [["Cycle time", "robot controller"], ["Gripper faults", "cell PLC"], ["Joint torque", "controller (if exposed)"]],
-      signal: { name: "Cycle time", unit: "s", base: 11.8, noise: 0.25, limit: 13.5, fault: 2.6 },
-      kpis: [["Picks / h", "", 302, 6], ["Gripper faults", "/shift", 1, 0.3]],
-      fault: "Simulate gripper misses",
-      insight: ["Cycle time rising with retry events — gripper missing picks.", "Suggested: inspect vacuum cups/fingers; correlate with part batch."] },
-    { id: "line", name: "Assembly line", short: "Line",
-      link: "Station states and counts from each PLC — the line is only as fast as its slowest station.",
-      sensors: [["Station states", "PLC"], ["Good / reject counts", "PLC / vision"], ["Buffer levels", "sensors"]],
-      signal: { name: "Station 3 wait time", unit: "s/cycle", base: 1.4, noise: 0.3, limit: 4.0, fault: 4.1 },
-      kpis: [["OEE", "%", 71, 1], ["Output", "units/h", 186, 4]],
-      fault: "Simulate bottleneck",
-      insight: ["Station 3 waiting on station 2 — bottleneck has moved upstream.", "Suggested: rebalance tasks between stations 2 and 3; verify with a time study."] }
+    { key: "machining", name: "Precision machining", img: "1713371398485-7bde1bde9def",
+      alt: "CNC milling spindle cutting a metal part",
+      kind: "CNC machining centres, turning and milling",
+      signals: ["Spindle load", "Vibration", "Cycle time", "Tool life"],
+      question: "Is tool wear, not the programme, driving scrap and cycle-time drift?",
+      opportunity: "Controller data plus a few retrofit sensors → tool-change timing and part-quality trends." },
+    { key: "robotics", name: "Robotics & automation", img: "1647427060118-4911c9821b82",
+      alt: "Row of orange industrial robot arms on a production line",
+      kind: "Robotic cells, pick-and-place, welding lines",
+      signals: ["Cycle time", "Fault codes", "Gripper retries", "Joint torque (if exposed)"],
+      question: "Where does the cell actually lose time — the robot, or waiting on its neighbours?",
+      opportunity: "Cell-level event logging → micro-stop analysis and balanced line takt." },
+    { key: "rotating", name: "Motors & rotating equipment", img: "1567093322102-6bdd32fba67d",
+      alt: "Macro photograph of interlocking metal gears",
+      kind: "Motors, gearboxes, pumps, compressors, fans",
+      signals: ["Vibration RMS", "Motor current", "Bearing temperature", "Pressure / flow"],
+      question: "Can we see bearing or alignment problems weeks before they stop the line?",
+      opportunity: "Condition indicators and alert rules → planned instead of emergency maintenance." },
+    { key: "handling", name: "Material handling", img: "1535923430552-0ce3cd477cc7",
+      alt: "Industrial conveyor machine in a manufacturing hall",
+      kind: "Conveyors, AGVs, warehouse and intralogistics",
+      signals: ["Belt speed", "Jam events", "Throughput", "Buffer levels"],
+      question: "Are material-flow stoppages hiding the real bottleneck?",
+      opportunity: "Flow and jam data → buffer sizing, routing and staffing decisions." },
+    { key: "assembly", name: "Production & assembly lines", img: "1717386255773-1e3037c81788",
+      alt: "Automated assembly line inside a large modern factory",
+      kind: "Multi-station lines, manual and automated assembly",
+      signals: ["Station states", "Good / reject counts", "Takt vs. cycle", "Changeover time"],
+      question: "Which station sets the pace today — and does it change by shift?",
+      opportunity: "Line-wide OEE and loss tracking → focused Lean improvements." },
+    { key: "process", name: "Process & packaging", img: "1764745021344-317b80f09e40",
+      alt: "Industrial conveyor and processing machine with metal components",
+      kind: "Packaging, filling, forming, thermal processing",
+      signals: ["Temperatures", "Pressures", "Speeds", "Reject reasons"],
+      question: "Which process parameters actually predict a bad batch?",
+      opportunity: "Parameter logging and SPC → fewer rejects, faster root cause." }
   ],
 
-  /* ---------- 04 OPERATIONS ↔ BUSINESS ---------- */
-  nodes: {
-    machine: { label: "Machine & production data", x: 120, y: 130 },
-    maint:   { label: "Maintenance records", x: 120, y: 300 },
-    ai:      { label: "AI-assisted processing", x: 420, y: 60 },
-    report:  { label: "Production reporting", x: 420, y: 210 },
-    stock:   { label: "Inventory & logistics", x: 420, y: 370 },
-    erp:     { label: "ERP & business apps", x: 720, y: 300 },
-    dash:    { label: "Management dashboard", x: 720, y: 130 }
-  },
-  edges: [["machine","ai"],["machine","report"],["machine","maint"],["ai","report"],["report","dash"],["ai","dash"],["maint","erp"],["maint","report"],["stock","erp"],["erp","dash"],["erp","stock"],["report","erp"]],
-  scenarios: [
-    { name: "Shift report writes itself", path: ["machine","ai","report","dash"],
-      steps: ["Counts, stops and alarms collected at shift end", "Stops grouped by cause; a short summary drafted", "Report assembled in the agreed format", "Published for the morning meeting — no re-typing"] },
-    { name: "Alarm → maintenance log", path: ["machine","maint","erp","stock"],
-      steps: ["Machine raises a confirmed alarm", "Maintenance entry created with the trend attached", "Spare part requested in the ERP", "Stock reserved; reorder if below minimum"] },
-    { name: "Stock → reorder", path: ["stock","erp","dash"],
-      steps: ["Stock falls below reorder point", "Purchase proposal prepared in the ERP for approval", "Buyer and planner see it on the dashboard"] },
-    { name: "Weekly KPI pack", path: ["machine","report","erp","dash"],
-      steps: ["Production data aggregated for the week", "OEE and losses calculated consistently", "Joined with orders and costs from the ERP", "One management view instead of five spreadsheets"] }
+  /* ---------- 04 CAPABILITIES ---------- */
+  capabilities: [
+    { n: "01", name: "Industry 4.0 & Industrial Intelligence", img: "1757981989497-fa816e1f1634",
+      line: "Sensors, data acquisition and dashboards that make machines and lines visible." },
+    { n: "02", name: "Equipment Monitoring & Condition Insights", img: "1666634157070-6fd830fb5672",
+      line: "Choosing the right signals per machine, then turning trends into maintenance decisions." },
+    { n: "03", name: "Operational Excellence & Lean Six Sigma", img: "1701328778019-e95dedbf5346",
+      line: "Process mapping, root cause, DMAIC and OEE — fix the flow before digitising it." },
+    { n: "04", name: "Automation & Practical AI", img: "1716191299980-a6e8827ba10b",
+      line: "Removing repetitive reporting and data handling, with AI only where it is reliable." },
+    { n: "05", name: "Production, ERP & Process Integration", img: "1781330173666-11f8818d6eb2",
+      line: "Mapping how information really flows, and connecting production with the ERP. Vendor-neutral." },
+    { n: "06", name: "Supply Chain, Logistics & Industrial Strategy", img: "1684695747561-9372850cf165",
+      line: "Logistics analysis, sourcing and feasibility studies — including India–Europe opportunities." }
   ],
 
-  /* ---------- 05 LEAN SIX SIGMA — DMAIC ---------- */
-  dmaic: [
-    { k: "D", name: "Define", q: "What problem, for whom, and what does better look like?",
-      tools: ["Problem statement", "SIPOC", "Project charter"],
-      ex: "Packaging line output varies a lot between shifts. Goal: stable cycle time near target." },
-    { k: "M", name: "Measure", q: "How does the process really perform today?",
-      tools: ["Data collection plan", "Baseline capability", "Measurement check"],
-      ex: "Cycle-time data captured automatically from the line — wide spread, frequent outliers." },
-    { k: "A", name: "Analyse", q: "What causes the variation?",
-      tools: ["Pareto", "Fishbone / 5 Whys", "Data stratification"],
-      ex: "Outliers cluster around changeovers and one material supplier." },
-    { k: "I", name: "Improve", q: "Which change removes the root cause?",
-      tools: ["Countermeasures", "Pilot run", "SMED for changeovers"],
-      ex: "Standard changeover + incoming material check piloted on one shift." },
-    { k: "C", name: "Control", q: "How do we keep the gain?",
-      tools: ["Control chart", "Standard work", "Automated alerts"],
-      ex: "Control limits monitored automatically; drift triggers an alert, not a meeting." }
+  /* ---------- 06 APPROACH ---------- */
+  steps: [
+    { name: "Understand", text: "Start from the business or engineering problem — on site, with the people who live with it. Agree what success would look like.", out: "A clear problem statement and success measure" },
+    { name: "Measure", text: "Capture how the process or machine really behaves today, using existing data first and adding sensors only where needed.", out: "A trustworthy baseline" },
+    { name: "Analyse", text: "Separate symptoms from causes with data, process maps and engineering judgement.", out: "Ranked root causes and options" },
+    { name: "Improve", text: "Design the simplest practical change and run it as a small pilot on one machine, line or team.", out: "A working pilot" },
+    { name: "Validate", text: "Compare the pilot with the baseline. Keep what proves itself, document it, and decide whether to scale.", out: "Evidence for the next decision" }
+  ],
+
+  /* ---------- PHOTO CREDITS (Unsplash License / Pexels License) ---------- */
+  credits: [
+    ["Hero video", "Daniel Smyth", "Pexels", "https://www.pexels.com/video/a-machine-is-cutting-metal-with-a-metal-cutting-tool-9033891/"],
+    ["Drill sparks", "Greg Rosenke", "Unsplash", "https://unsplash.com/photos/drill-bit-cutting-with-sparks-xoxnfVIE7Qw"],
+    ["Lathe", "Sven Daniel", "Unsplash", "https://unsplash.com/photos/a-close-up-of-a-machine-DV_rG1mjDxs"],
+    ["CNC spindle", "Jelifer Maniago", "Unsplash", "https://unsplash.com/photos/a-machine-that-is-cutting-a-piece-of-metal-8MBTn3Z71zI"],
+    ["Robot line", "Simon Kadula", "Unsplash", "https://unsplash.com/photos/a-factory-filled-with-lots-of-orange-machines-8gr6bObQLOI"],
+    ["Gears", "Jonathan Borba", "Unsplash", "https://unsplash.com/photos/assorted-gears-macro-photography-5Taa8b9E55k"],
+    ["Conveyor", "Markus Winkler", "Unsplash", "https://unsplash.com/photos/black-and-brown-industrial-machine-tkpK5vuBqaY"],
+    ["Assembly line", "Homa Appliances", "Unsplash", "https://unsplash.com/photos/a-large-machine-in-a-large-building-pWUyHVJgLhg"],
+    ["Process machine", "Zero Vo", "Unsplash", "https://unsplash.com/photos/industrial-conveyor-belt-machine-with-metal-parts-E_B09LIHS9Q"],
+    ["Robotic cell", "Anonymous Fox", "Unsplash", "https://unsplash.com/photos/complex-industrial-machinery-with-robotic-arms-W0wonxdZsbI"],
+    ["Metal turning", "Sven Daniel", "Unsplash", "https://unsplash.com/photos/metal-rod-machining-on-lathe-eaanLTG7TCU"],
+    ["Factory floor", "Hyundai Motor Group", "Unsplash", "https://unsplash.com/photos/a-factory-filled-with-lots-of-machines-and-boxes-h2rWePLKxvs"],
+    ["Robot arm", "Homa Appliances", "Unsplash", "https://unsplash.com/photos/blue-industrial-robot-arm-in-factory-sz1CHL7Pky0"],
+    ["Machinery row", "Daniel Miksha", "Unsplash", "https://unsplash.com/photos/a-row-of-complex-industrial-machinery-in-a-modern-facility-K-AGcjpmU-c"],
+    ["Warehouse conveyor", "Alberto Rodríguez", "Unsplash", "https://unsplash.com/photos/a-conveyor-belt-in-a-large-warehouse-qVpGF1mlaM8"],
+    ["Laser sparks", "Le Trung", "Unsplash", "https://unsplash.com/photos/a-piece-of-metal-being-cut-with-a-machine-fBCQz7OUUww"],
+    ["Black gears", "Isis França", "Unsplash", "https://unsplash.com/photos/close-up-photography-of-black-metal-gears-hsPFuudRg5I"]
   ]
 };
