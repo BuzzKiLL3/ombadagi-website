@@ -52,6 +52,8 @@ To self-host photos, download them the same way and point the `src` attributes o
 
 ## Editing
 
+> **After changing `styles.css` or any `.js` file, bump the `?v=` number on its `<link>`/`<script>` tag in `index.html`.** Cloudflare tells browsers to cache CSS/JS for 4 hours; a new `?v=` forces phones and laptops to fetch the new file immediately.
+
 - **Email, LinkedIn, gallery, approach steps:** edit `data.js`.
 - **Headline, philosophy, capabilities, about, contact text:** edit `index.html`.
 - **Colours and fonts:** edit the variables at the top of `styles.css`.

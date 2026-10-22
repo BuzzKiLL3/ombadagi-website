@@ -199,7 +199,7 @@
   }
 
   /* ---------- scroll parallax + hero depth (one rAF loop) ---------- */
-  var plx = reduce ? [] : $$("[data-parallax]");
+  var plx = (reduce || window.innerWidth < 900) ? [] : $$("[data-parallax]"); // no scroll parallax on phones/tablets
   var heroMedia = $("[data-hero-media]");
   var hx = 0, hy = 0, thx = 0, thy = 0, ticking = false;
   if (fine && !reduce && heroMedia) {
