@@ -301,7 +301,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 /* ------------------------------------------------------------------- footer */
 .footer { background: var(--navy-950); color: var(--muted-on-dark); padding-block: var(--s-8) var(--s-6); font-size: var(--fs-sm); }
 .footer .logo { color: var(--text-on-dark); }
-.f-grid { display: grid; grid-template-columns: minmax(0,1.4fr) repeat(3, minmax(0,1fr)); gap: var(--s-6); }
+.f-grid { display: grid; grid-template-columns: minmax(0,1.3fr) repeat(4, minmax(0,1fr)); gap: var(--s-6); }
 .f-about { margin-top: var(--s-4); max-width: 320px; }
 .footer h2 { font-size: var(--fs-xs); font-family: var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--text-on-dark); font-weight: 500; margin-bottom: var(--s-4); }
 .footer ul { list-style: none; display: grid; gap: 10px; }
@@ -486,6 +486,11 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .prose p { margin-top: var(--s-3); color: var(--ink-2); }
 .prose .meta { font-size: var(--fs-sm); color: var(--ink-3); margin-top: var(--s-6); }
 
+.offices { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-top: 12px; }
+.office { display: grid; gap: 2px; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--paper); font-size: var(--fs-sm); color: var(--ink-2); }
+.office strong { color: var(--ink); font-weight: 600; }
+.office a { color: var(--accent-strong); text-decoration: none; font-weight: 500; font-variant-numeric: tabular-nums; }
+.office a:hover { text-decoration: underline; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
 .chips li { padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--r-sm); font-size: var(--fs-sm); background: var(--paper); color: var(--ink-2); }
 .dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 24px; font-size: var(--fs-sm); }
@@ -535,7 +540,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .step::after { display: none; }
   .split, .form-wrap { grid-template-columns: 1fr; }
   .split .sec-head { position: static; margin-bottom: var(--s-6); }
-  .f-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .f-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
   .f-grid > div:first-child { grid-column: 1 / -1; }
   .cta-band { grid-template-columns: 1fr; }
   .tiles { grid-template-columns: repeat(2, minmax(0,1fr)); }

@@ -55,6 +55,8 @@ const I = {
 const GLYPH = { "quotation-erp": I.doc, "whatsapp-automation": I.chat, "digital-twins": I.cube };
 const HUE = { "quotation-erp": "erp", "whatsapp-automation": "wa", "digital-twins": "dt" };
 const glyph = (slug) => `<span class="glyph g-${HUE[slug]}" aria-hidden="true">${GLYPH[slug]}</span>`;
+const officeLine = (o) => [o.city, o.region, o.country].filter(Boolean).join(", ") + " – " + o.postalCode;
+const officeBlock = (o, cls = "") => `<div class="office ${cls}"><strong>${esc(o.country)}</strong><span>${esc(officeLine(o))}</span><a href="tel:${esc(o.phone)}">${esc(o.phoneDisplay)}</a></div>`;
 const pill = (status) => `<span class="pill pill-${status}">${esc(T.ui.status[status])}</span>`;
 
 /* --------------------------------------------------------------------- logo */
@@ -70,6 +72,8 @@ function head({ title, description, path, jsonld = [], noindex = false }) {
     "@context": "https://schema.org", "@type": "Organization", "@id": config.url + "/#org",
     name: config.name, url: config.url + "/", logo: config.url + "/assets/logo-512.png",
     email: config.contactEmail, sameAs: [config.parentUrl + "/"],
+    address: config.offices.map((o) => ({ "@type": "PostalAddress", addressLocality: o.city, ...(o.region ? { addressRegion: o.region } : {}), postalCode: o.postalCode, addressCountry: o.countryCode })),
+    contactPoint: config.offices.map((o) => ({ "@type": "ContactPoint", contactType: "sales", telephone: o.phone, email: config.contactEmail, areaServed: o.countryCode, availableLanguage: ["en", "fr"] })),
     founder: { "@type": "Person", name: config.parentName, url: config.parentUrl + "/" }
   };
   const ld = [org, ...jsonld].map((o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, "\\u003c")}</script>`).join("\n  ");
@@ -143,7 +147,8 @@ function footer() {
     <div class="f-grid">
       <div>${logo()}<p class="f-about">${esc(T.footer.about)}</p></div>
       <nav aria-label="${esc(T.footer.productsTitle)}"><h2>${esc(T.footer.productsTitle)}</h2><ul>${PRODUCT_ORDER.map((s) => `<li><a href="/products/${s}">${esc(T.products[s].name)}</a></li>`).join("")}<li><a href="/products">${esc(T.ui.allProducts)}</a></li></ul></nav>
-      <nav aria-label="${esc(T.footer.companyTitle)}"><h2>${esc(T.footer.companyTitle)}</h2><ul><li><a href="/about">${esc(T.ui.about)}</a></li><li><a href="/contact">${esc(T.ui.contact)}</a></li><li><a href="mailto:${esc(config.contactEmail)}">${esc(config.contactEmail)}</a></li></ul></nav>
+      <nav aria-label="${esc(T.footer.companyTitle)}"><h2>${esc(T.footer.companyTitle)}</h2><ul><li><a href="/about">${esc(T.ui.about)}</a></li><li><a href="/contact">${esc(T.ui.contact)}</a></li></ul></nav>
+      <div><h2>${esc(T.ui.contact)}</h2><ul><li><a href="mailto:${esc(config.contactEmail)}">${esc(config.contactEmail)}</a></li>${config.offices.map((o) => `<li>${esc(o.country)} · <a href="tel:${esc(o.phone)}">${esc(o.phoneDisplay)}</a></li>`).join("")}</ul></div>
       <nav aria-label="${esc(T.footer.legalTitle)}"><h2>${esc(T.footer.legalTitle)}</h2><ul><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Service</a></li></ul></nav>
     </div>
     <div class="f-bottom">
@@ -573,7 +578,7 @@ ${ctaBand("Have an industrial data question?", "Tell us about the asset, the sig
 /* ABOUT */
 pages["/about"] = () => {
   const A = T.about, L = config.legal;
-  const rows = [["Business name", config.name], ["Registration", L.registrationNote], ["Udyam number", L.udyamNumber], ["GSTIN", L.gstin], ["Registered address", L.registeredAddress], ["Contact", `<a class="link" href="mailto:${esc(config.contactEmail)}">${esc(config.contactEmail)}</a>`]].filter((r) => r[1]);
+  const rows = [["Business name", config.name], ["Registration", L.registrationNote], ["Udyam number", L.udyamNumber], ["GSTIN", L.gstin], ["Registered address", L.registeredAddress], ...config.offices.map((o) => [o.country, `${esc(officeLine(o))}<br><a class="link" href="tel:${esc(o.phone)}">${esc(o.phoneDisplay)}</a>`]), ["Email", `<a class="link" href="mailto:${esc(config.contactEmail)}">${esc(config.contactEmail)}</a>`]].filter((r) => r[1]);
   const body = `
 <section class="hero dark page-hero simple"><div class="hero-grid-bg" aria-hidden="true"></div><div class="wrap hero-in"><div>
   <span class="eyebrow">${esc(A.eyebrow)}</span><h1>${esc(A.heading)}</h1><p class="hero-text">${esc(A.text)}</p>
@@ -596,7 +601,7 @@ pages["/about"] = () => {
 
 <section class="section mist" aria-labelledby="fo-h"><div class="wrap split">
   <div class="sec-head rv"><span class="eyebrow">${esc(A.founderTitle)}</span><h2 id="fo-h">${esc(config.parentName)}</h2><p>${esc(A.founderText)}</p><p><a class="link" href="${config.parentUrl}/">${esc(A.founderLink)} ${I.arrow}</a></p></div>
-  <div class="rv"><h3 style="font-size:var(--fs-md);margin-bottom:16px">${esc(A.legalTitle)}</h3><dl class="dl">${rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${k === "Contact" ? v : esc(v)}</dd>`).join("")}</dl></div>
+  <div class="rv"><h3 style="font-size:var(--fs-md);margin-bottom:16px">${esc(A.legalTitle)}</h3><dl class="dl">${rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${/<a |<br>/.test(v) ? v : esc(v)}</dd>`).join("")}</dl></div>
 </div></section>
 
 ${ctaBand(T.home.final.title, T.home.final.text, btn("/products", T.ui.exploreProducts, { lg: true }), btn("/contact", T.home.final.cta2, { ghost: true, lg: true }))}
@@ -616,6 +621,7 @@ pages["/contact"] = () => {
     <div class="aside-list">
       <div><h2 class="h3" style="font-size:var(--fs-md)">${esc(C.expectTitle)}</h2><ol class="list-check" style="margin-top:12px">${C.expect.map((e) => `<li>${I.check}<span>${esc(e)}</span></li>`).join("")}</ol></div>
       <div><h2 style="font-size:var(--fs-md)">${esc(C.directTitle)}</h2><p style="margin-top:6px">${esc(C.directText)} <a class="link" href="mailto:${esc(config.contactEmail)}">${esc(config.contactEmail)}</a></p></div>
+      <div><h2 style="font-size:var(--fs-md)">${esc(C.officesTitle)}</h2><div class="offices">${config.offices.map((o) => officeBlock(o)).join("")}</div></div>
     </div>
   </div>
   ${leadForm("contact", { title: C.heading })}

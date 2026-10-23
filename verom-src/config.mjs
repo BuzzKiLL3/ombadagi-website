@@ -11,7 +11,13 @@ export const config = {
 
   // Public contact address. Shown on the Contact page and used as the
   // fallback when the form delivery service is not configured.
-  contactEmail: "ombadagi@gmail.com",
+  contactEmail: "contact@ombadagi.com",
+
+  // Offices shown on Contact, About and in the footer (city level only).
+  offices: [
+    { country: "India", countryCode: "IN", city: "Belgaum", region: "Karnataka", postalCode: "590001", phone: "+919448380069", phoneDisplay: "+91 94483 80069" },
+    { country: "France", countryCode: "FR", city: "Lille", region: null, postalCode: "59650", phone: "+33644071981", phoneDisplay: "+33 6 44 07 19 81" }
+  ],
   linkedin: "https://www.linkedin.com/in/om-badagi",
 
   // Legal and registration details. Add verified values only.

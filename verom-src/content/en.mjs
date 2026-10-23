@@ -368,6 +368,7 @@ export const en = {
     heading: "Tell us what you want to improve.",
     text: "Describe the workflow, the product you are interested in, or the problem you want to solve. We reply by email.",
     directTitle: "Prefer email?",
+    officesTitle: "Offices",
     directText: "Write to us directly at",
     expectTitle: "What happens next",
     expect: [

@@ -53,7 +53,7 @@ Configure at least one channel in **Pages project → Settings → Variables and
 | Name | Type | Required | Purpose |
 |---|---|---|---|
 | `RESEND_API_KEY` | Secret | For email | API key from resend.com (free tier) |
-| `LEAD_TO_EMAIL` | Text | For email | Where submissions go, e.g. `ombadagi@gmail.com` (comma-separate several) |
+| `LEAD_TO_EMAIL` | Text | For email | Where submissions go, e.g. `contact@ombadagi.com` (comma-separate several) |
 | `LEAD_FROM_EMAIL` | Text | Optional | Sender. Default `onboarding@resend.dev`, which only delivers to your own Resend account email. After verifying `ombadagi.com` in Resend, use e.g. `Verom Website <leads@ombadagi.com>` |
 | `LEAD_WEBHOOK_URL` | Secret | Optional | POST each submission as JSON (Google Apps Script, Make, Zapier, Slack workflow…) |
 | `LEAD_WEBHOOK_SECRET` | Secret | Optional | Sent as `X-Verom-Secret` header so the webhook can verify the sender |
@@ -119,6 +119,6 @@ Customer management, taxes and discounts, search/filter and exports are **not** 
 - Attach `verom.ombadagi.com` (above), then configure a form channel and send a test submission.
 - Add verified Udyam number, GSTIN, registered address and governing law in `config.mjs`.
 - Have the Privacy Policy and Terms reviewed (both pages are marked as starter text).
-- Consider a dedicated business address such as `contact@ombadagi.com` (Cloudflare Email Routing, free) instead of the Gmail address.
+- Consider a dedicated business address such as `contact@ombadagi.com` (Cloudflare Email Routing, free) instead of the personal address.
 - Pricing section: intentionally absent until real prices exist.
 - French version: structure ready, translation not done.
