@@ -24,3 +24,6 @@
   Content-Type: application/json
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=300
+
+/index.md
+  Content-Type: text/markdown; charset=utf-8
