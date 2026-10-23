@@ -1,0 +1,16 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://ombadagi.com/api/v1",
+      "service-desc": [
+        { "href": "https://ombadagi.com/openapi.json", "type": "application/vnd.oai.openapi+json" }
+      ],
+      "service-doc": [
+        { "href": "https://ombadagi.com/docs/api.html", "type": "text/html" }
+      ],
+      "status": [
+        { "href": "https://ombadagi.com/api/v1/health.json", "type": "application/json" }
+      ]
+    }
+  ]
+}

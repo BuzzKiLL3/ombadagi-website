@@ -15,6 +15,8 @@ Static site: HTML, CSS and vanilla JavaScript. **No build step, no framework, no
 | `instrument.js` | The interactive demonstration (gauge, OEE, workflow). All values are simulated in the browser |
 | `assets/favicon.svg` | Favicon |
 | `_headers` | Cloudflare Pages security headers (CSP allows Unsplash/Pexels media) |
+| `.well-known/api-catalog` | RFC 9727 API catalog (linkset) for agent discovery |
+| `openapi.json`, `api/v1/*.json`, `docs/api.html` | Small read-only public API: spec, endpoints (profile, health), docs |
 | `robots.txt`, `sitemap.xml` | Basic SEO |
 
 ## Cloudflare Pages settings

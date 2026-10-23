@@ -1,0 +1,71 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ombadagi.com public API",
+    "version": "1.0.0",
+    "description": "Read-only JSON describing Om Badagi's engineering and Industry 4.0 consulting services. Static, no authentication.",
+    "contact": { "name": "Om Badagi", "email": "ombadagi@gmail.com", "url": "https://ombadagi.com/" }
+  },
+  "servers": [{ "url": "https://ombadagi.com/api/v1" }],
+  "externalDocs": { "url": "https://ombadagi.com/docs/api.html" },
+  "paths": {
+    "/profile.json": {
+      "get": {
+        "operationId": "getProfile",
+        "summary": "Consultant profile, capabilities and contact details",
+        "responses": {
+          "200": {
+            "description": "Profile",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Profile" } } }
+          }
+        }
+      }
+    },
+    "/health.json": {
+      "get": {
+        "operationId": "getHealth",
+        "summary": "Service status",
+        "responses": {
+          "200": {
+            "description": "Status",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Health" } } }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Health": {
+        "type": "object",
+        "required": ["status"],
+        "properties": {
+          "status": { "type": "string", "enum": ["ok"] },
+          "service": { "type": "string" },
+          "version": { "type": "string" }
+        }
+      },
+      "Profile": {
+        "type": "object",
+        "required": ["name", "capabilities", "contact"],
+        "properties": {
+          "name": { "type": "string" },
+          "headline": { "type": "string" },
+          "summary": { "type": "string" },
+          "regions": { "type": "array", "items": { "type": "string" } },
+          "languages": { "type": "array", "items": { "type": "string" } },
+          "capabilities": { "type": "array", "items": { "type": "string" } },
+          "approach": { "type": "array", "items": { "type": "string" } },
+          "contact": {
+            "type": "object",
+            "properties": {
+              "email": { "type": "string", "format": "email" },
+              "linkedin": { "type": "string", "format": "uri" },
+              "website": { "type": "string", "format": "uri" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

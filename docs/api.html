@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API — Om Badagi</title>
+<meta name="description" content="Documentation for the read-only ombadagi.com public API.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<style>
+  :root { color-scheme: light dark; --bg:#fbfaf7; --fg:#16161a; --mute:#5c5c66; --line:#e3e0d8; --code:#f1eee7; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111114; --fg:#ecebe6; --mute:#9a9aa3; --line:#2a2a30; --code:#1b1b20; } }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui, sans-serif; }
+  main { max-width:720px; margin:0 auto; padding:48px 16px; }
+  h1 { font-size:2rem; margin:0 0 8px; } h2 { margin-top:2.2em; font-size:1.2rem; }
+  p, li { color:var(--mute); } a { color:inherit; }
+  code, pre { font-family:ui-monospace, monospace; font-size:.9em; background:var(--code); border-radius:6px; }
+  code { padding:1px 5px; } pre { padding:14px; overflow-x:auto; border:1px solid var(--line); }
+  table { width:100%; border-collapse:collapse; } td, th { text-align:left; padding:8px 6px; border-bottom:1px solid var(--line); }
+</style>
+</head>
+<body>
+<main>
+  <p><a href="/">← ombadagi.com</a></p>
+  <h1>Public API</h1>
+  <p>Read-only JSON about Om Badagi's engineering and Industry 4.0 consulting. No authentication, no rate limit beyond Cloudflare defaults.</p>
+
+  <h2>Base URL</h2>
+  <pre>https://ombadagi.com/api/v1</pre>
+
+  <h2>Endpoints</h2>
+  <table>
+    <tr><th>Method</th><th>Path</th><th>Returns</th></tr>
+    <tr><td>GET</td><td><a href="/api/v1/profile.json"><code>/profile.json</code></a></td><td>Profile, capabilities, regions, contact</td></tr>
+    <tr><td>GET</td><td><a href="/api/v1/health.json"><code>/health.json</code></a></td><td>Service status</td></tr>
+  </table>
+
+  <h2>Example</h2>
+  <pre>curl https://ombadagi.com/api/v1/profile.json</pre>
+
+  <h2>Machine-readable</h2>
+  <ul>
+    <li>OpenAPI 3.1: <a href="/openapi.json"><code>/openapi.json</code></a></li>
+    <li>API catalog (RFC 9727): <a href="/.well-known/api-catalog"><code>/.well-known/api-catalog</code></a></li>
+  </ul>
+</main>
+</body>
+</html>

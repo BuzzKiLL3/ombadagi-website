@@ -7,3 +7,20 @@
 
 /assets/*
   Cache-Control: public, max-age=604800
+
+/
+  Link: </.well-known/api-catalog>; rel="api-catalog"
+
+/.well-known/api-catalog
+  Content-Type: application/linkset+json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+
+/openapi.json
+  Content-Type: application/vnd.oai.openapi+json
+  Access-Control-Allow-Origin: *
+
+/api/*
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300

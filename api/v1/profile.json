@@ -1,0 +1,21 @@
+{
+  "name": "Om Badagi",
+  "headline": "Engineering intelligence. Transforming operations.",
+  "summary": "Mechanical engineer specialised in Industry 4.0. Independent engineering and digitalisation consulting for manufacturers.",
+  "regions": ["France", "Europe", "India"],
+  "languages": ["English", "French", "Spanish"],
+  "capabilities": [
+    "Industry 4.0 & Industrial Intelligence",
+    "Equipment Monitoring & Condition Insights",
+    "Operational Excellence & Lean Six Sigma",
+    "Automation & Practical AI",
+    "Production, ERP & Process Integration",
+    "Supply Chain, Logistics & Industrial Strategy"
+  ],
+  "approach": ["Measure", "Analyse", "Improve", "Validate"],
+  "contact": {
+    "email": "ombadagi@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/om-badagi",
+    "website": "https://ombadagi.com/"
+  }
+}
