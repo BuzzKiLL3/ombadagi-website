@@ -21,6 +21,10 @@ Static site: HTML, CSS and vanilla JavaScript. **No build step, no framework, no
 | `openapi.json`, `api/v1/*.json`, `docs/api.html` | Small read-only public API: spec, endpoints (profile, health), docs |
 | `robots.txt`, `sitemap.xml` | Basic SEO |
 
+## Verom Solutions (verom.ombadagi.com)
+
+This repo also hosts the separate **Verom Solutions** business site. Its files live in `verom/` (generated) and `verom-src/` (source). `functions/_middleware.js` serves them only when the hostname starts with `verom.`; on ombadagi.com nothing changes. See [`verom-src/README.md`](verom-src/README.md).
+
 ## Cloudflare Pages settings
 
 - Framework preset: **None**
