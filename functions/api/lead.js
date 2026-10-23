@@ -124,6 +124,7 @@ export async function onRequestPost({ request, env }) {
       })
     }).catch(() => null);
     if (r && r.ok) delivered++;
+    else console.error("lead: email delivery failed", r ? r.status : "network", r ? (await r.text().catch(() => "")).slice(0, 300) : "");
   }
 
   if (env.LEAD_WEBHOOK_URL) {
