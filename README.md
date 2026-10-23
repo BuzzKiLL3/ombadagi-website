@@ -16,6 +16,7 @@ Static site: HTML, CSS and vanilla JavaScript. **No build step, no framework, no
 | `assets/favicon.svg` | Favicon |
 | `_headers` | Cloudflare Pages security headers (CSP allows Unsplash/Pexels media) |
 | `index.md`, `functions/_middleware.js` | Markdown for agents: `Accept: text/markdown` on `/` returns `index.md` (keep it in sync with `index.html`) |
+| `auth.md` | Auth.md for agents: states access is anonymous, no registration or credentials |
 | `.well-known/api-catalog` | RFC 9727 API catalog (linkset) for agent discovery |
 | `openapi.json`, `api/v1/*.json`, `docs/api.html` | Small read-only public API: spec, endpoints (profile, health), docs |
 | `robots.txt`, `sitemap.xml` | Basic SEO |
