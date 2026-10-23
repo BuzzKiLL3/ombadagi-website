@@ -16,7 +16,7 @@ export const config = {
   // Offices shown on Contact, About and in the footer (city level only).
   offices: [
     { country: "India", countryCode: "IN", city: "Belgaum", region: "Karnataka", postalCode: "590001", phone: "+919448380069", phoneDisplay: "+91 94483 80069" },
-    { country: "France", countryCode: "FR", city: "Lille", region: null, postalCode: "59650", phone: "+33644071981", phoneDisplay: "+33 6 44 07 19 81" }
+    { country: "France", countryCode: "FR", city: "Lille", region: null, postalCode: "59000", phone: "+33644071981", phoneDisplay: "+33 6 44 07 19 81" }
   ],
   linkedin: "https://www.linkedin.com/in/om-badagi",
 
