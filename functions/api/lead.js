@@ -47,9 +47,11 @@ export async function onRequestPost({ request, env }) {
   if (!input || typeof input !== "object") return json(400, { ok: false, error: "invalid_json" });
 
   // --- spam signals: honeypot and fill time (bots get a quiet "ok", nothing is delivered)
-  const started = Number(input.startedAt);
-  const elapsed = Date.now() - started;
-  if (clean(input.website) || !Number.isFinite(started) || elapsed < 2500 || elapsed > 86400000) {
+  // fillMs is measured entirely in the visitor's browser (page open → submit),
+  // so it does not depend on the visitor's clock matching the server's.
+  const fillMs = Number(input.fillMs);
+  const tooFast = input.fillMs !== undefined && (!Number.isFinite(fillMs) || fillMs < 2500);
+  if (clean(input.website) || tooFast) {
     return json(200, { ok: true });
   }
 

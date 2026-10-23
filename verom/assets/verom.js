@@ -159,7 +159,7 @@
 
     function mailtoHref(data) {
       var lines = [];
-      Object.keys(data).forEach(function (k) { if (data[k] && ["startedAt", "website", "consent", "kind", "cf-turnstile-response"].indexOf(k) < 0) lines.push(k + ": " + data[k]); });
+      Object.keys(data).forEach(function (k) { if (data[k] && ["startedAt", "fillMs", "website", "consent", "kind", "cf-turnstile-response"].indexOf(k) < 0) lines.push(k + ": " + data[k]); });
       return "mailto:" + (I18N.email_to || "") + "?subject=" + encodeURIComponent("Verom Solutions — " + (I18N.subjects[kind] || "Enquiry")) + "&body=" + encodeURIComponent(lines.join("\n"));
     }
     function showAlert(msg, data) {
@@ -183,6 +183,8 @@
       var data = {};
       new FormData(form).forEach(function (v, k) { data[k] = typeof v === "string" ? v.trim() : v; });
       data.consent = !!$("input[name=consent]", form).checked;
+      data.fillMs = Date.now() - Number(data.startedAt || 0);   // same clock at both ends
+      delete data.startedAt;
       busy(true);
       fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(data), credentials: "same-origin" })
         .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, body: j }; }); })
